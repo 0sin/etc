@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL</title>
+  <!-- Facebook (Common) Open Graph -->
+  <meta property="og:type" content="미리보기 종류" />
+  <meta property="og:url" content="페이지 URL" />
+  <meta property="og:title" content="미리보기 제목" />
+  <meta property="og:description" content="미리보기 설명" />
+  <meta property="og:image" content="미리보기 이미지 주소" />
+  <!-- Twitter Open Graph -->
+  <meta name="twitter:card" content="트위터 미리보기 종류" />
+  <meta name="twitter:url" content="페이지 URL" />
+  <meta name="twitter:title" content="미리보기 제목" />
+  <meta name="twitter:description" content="미리보기 설명" />
+  <meta name="twitter:image" content="미리보기 이미지 주소" />
+
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+
+</head>
+<body>
+  <input type="text" id ="ShareUrl">
+  <span class="btn-type1">
+    <button OnClick="javascript:CopyUrlToClipboard()">URL 복사</button>
+  </span>
+
+  <br>
+  <button id="face">facebook공유</button>
+  <button id="twit">twitter공유</button>
+  <button id="insta">Instagram</button>
+  <button id="kaka">kakao공유</button>
+
+  <script>
+  function CopyUrlToClipboard() {
+    var obShareUrl = document.getElementById("ShareUrl");
+
+    obShareUrl.value = window.document.location.href;  // 현재 URL 을 세팅해 줍니다.
+
+    obShareUrl.select();  // 해당 값이 선택되도록 select() 합니다
+    document.execCommand("copy"); // 클립보드에 복사합니다.
+
+    obShareUrl.blur(); // 선택된 것을 다시 선택안된것으로 바꿈니다.
+
+    alert("URL이 클립보드에 복사되었습니다"); 
+  }
+
+  // Facebook 공유
+  const faceBtn = document.getElementById('face');
+  const twitBtn = document.getElementById('twit');
+  const instaBtn = document.getElementById('insta');
+  const kakaBtn = document.getElementById('kaka');
+
+  faceBtn.addEventListener('click', ()=>{
+    window.open(
+    'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent('https://0sin.github.io/whatshouldidrinktoday/')
+    )
+  });
+
+  twitBtn.addEventListener('click', ()=>{
+    window.open(
+    'https://twitter.com/intent/tweet?url=' + encodeURIComponent('https://0sin.github.io/whatshouldidrinktoday/')
+    )
+  });
+
+
+  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('35ebff6eb56a2ddc1365e97ddab6629e');
+
+// SDK 초기화 여부를 판단합니다.
+console.log(Kakao.isInitialized());
+
+
+  kakaBtn.addEventListener('click', ()=>{
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '디저트 사진',
+        description: '아메리카노, 빵, 케익',
+        imageUrl:
+          'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          androidExecParams: 'test',
+        },
+      },
+      social: {
+        likeCount: 10,
+        commentCount: 20,
+        sharedCount: 30,
+      },
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+          },
+        },
+      ]
+    });
+  });
+
+
+ 
+
+
+  // 결과공유하기
+
+
+  </script>
+
+<a id="kakao-link-btn" href="javascript:sendLink()">
+  <img
+    src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+  />
+</a>
+<script type="text/javascript">
+  function sendLink() {
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '딸기 치즈 케익',
+        description: '#케익 #딸기 #삼평동 #카페 #분위기 #소개팅',
+        imageUrl:
+          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ],
+    })
+  }
+</script>
+</body>
+</html>
