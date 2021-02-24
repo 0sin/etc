@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media JS</title>
+</head>
+<body>
+  
+<script>
+  // Property
+  // matches:	Used to check the results of a query. Returns a boolean value: true if the document matches the media query list, otherwise false
+  // media:	A String, representing the serialized media query list
+  var m = matchMedia("screen and (min-width: 1024px)");
+  m.media // -> "screen and (min-width: 1024px)"
+  m.matches // -> true
+
+  // Method
+  // addListener(functionref)	Adds a new listener function, which is executed whenever the media query's evaluated result changes
+  // removeListener(functionref)	Removes a previously added listener function from the media query list. Does nothing if the specified listener is not already in the list
+
+  function myFunction(x) {
+    if (x.matches) { // If media query matches
+      document.body.style.backgroundColor = "yellow";
+    } else {
+      document.body.style.backgroundColor = "pink";
+    }
+  }
+
+  var x = window.matchMedia("(max-width: 700px)")
+  myFunction(x) // Call listener function at run time
+  x.addListener(myFunction) // Attach listener function on state changes
+
+</script>
+
+<h1 id="h1"></h1>
+<script>
+// Create a condition that targets viewports at least 768px wide
+const mediaQuery = window.matchMedia('(min-width: 768px)')
+const h1 = document.getElementById('h1');
+
+function handleTabletChange(e) {
+  // Check if the media query is true
+  if (e.matches) {
+    // Then log the following message to the console
+    h1.innerHTML = 'true'
+  } else {
+    h1.innerHTML = 'false'
+  }
+}
+
+// Register event listener
+mediaQuery.addListener(handleTabletChange)
+
+// Initial check
+handleTabletChange(mediaQuery)
+</script>
+
+<script>
+  // The old way of doing things
+  function checkMediaQuery() {
+    // If the inner width of the window is greater then 768px
+    if (window.innerWidth > 768) {
+      // Then log this message to the console
+      console.log('Media Query Matched!')
+    }
+  }
+
+// Add a listener for when the window resizes
+window.addEventListener('resize', checkMediaQuery);
+</script>
+
+</body>
+</html>
