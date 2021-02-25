@@ -13,8 +13,8 @@
   // matches:	Used to check the results of a query. Returns a boolean value: true if the document matches the media query list, otherwise false
   // media:	A String, representing the serialized media query list
   var m = matchMedia("screen and (min-width: 1024px)");
-  m.media // -> "screen and (min-width: 1024px)"
-  m.matches // -> true
+  console.log(m.media) // -> "screen and (min-width: 1024px)" 주어진 미디어 쿼리를 string 으로 serialize 한 값
+  console.log(m.matches) // -> true
 
   // Method
   // addListener(functionref)	Adds a new listener function, which is executed whenever the media query's evaluated result changes
@@ -69,6 +69,20 @@ handleTabletChange(mediaQuery)
 
 // Add a listener for when the window resizes
 window.addEventListener('resize', checkMediaQuery);
+</script>
+
+<script>
+ // 600px 보다 크면 matches 가 false, 크면 true 가 되는 미디어 쿼리 리스트 생성
+const mediaQueryList = window.matchMedia(`(max-width: 600px)`);
+
+// document 가 미디어 쿼리를 충족시키는것에 대해 변화가 생기면 콘솔에 로깅한다
+const changeHandler = (e) => { //e: : MediaQueryListEvent
+  console.log("changed!");
+};
+
+// 600px 을 기준으로 document width 가 바뀔 때 마다 이벤트 핸들러를 호출한다
+mediaQueryList.addEventListener("change", changeHandler);
+//IE 의 경우 change 이벤트를 발생시키지 않기 때문에, IE 에서는 addListener() 로 이벤트 핸들러를 달아주어야 한다.
 </script>
 
 </body>
